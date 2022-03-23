@@ -1,6 +1,6 @@
 ## 图书管理系统
 
-**基于springboot+mybatisPlus+bootstrapi**
+**基于springboot+mybatisPlus+bootstrap**
 
 ### 一.简单使用
 
