@@ -1,10 +1,10 @@
 ## 图书管理系统
 
-**基于springboot+mybatisPlus+semantic-ui**
+**基于springboot+mybatisPlus+bootstrapi**
 
 ### 一.简单使用
 
-1.创建数据库blog,并设置好数据源
+1.创建数据库library,并设置好数据源
 
 ```xml
 spring:
