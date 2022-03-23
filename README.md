@@ -9,4 +9,7 @@
 
 ### 2.图书管理系统library-master
 
-基于springboot+mybatis+bootstrap
+基于springboot+mybatisPlus+bootstrap
+
+![image](https://user-images.githubusercontent.com/101373229/159658134-3e7ba450-9570-45f4-923b-c47354bb49cb.png)
+
