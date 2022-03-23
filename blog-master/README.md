@@ -1,19 +1,56 @@
-### 基于springboot+jpa+semantic-ui的个人博客
+## 个人博客
 
-### (参考lrm老师课程)
+**基于springboot+jpa+semantic-ui**
 
-1.先创建好数据库blog,JPA逆向工程会自动建表
+``参考lrm老师课程``
 
-2.项目初始化完成以后,要向user表中插入记录
+### 一.简单使用
 
-​	注意:要使用MD5加密以后的密码(打开MD5工具类)
+0.不提供数据库脚本,因为该项目自动建表
 
-3.实现功能:
+1.创建数据库blog,并设置好数据源
 
-后台登录,博客,分类,标签的管理
+```xml
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: 123456
+```
 
-博客的详情展示,分页列表,分类展示,标签展示,个人信息,搜索功能的实现
+2.打开启动类 BlogApplication运行,jpa逆向工程会自动建表
 
-已经实现了评论,赞赏,推荐
+3.使用Navicat或SQLyog连接好数据库,往表中插入用户,保存MD5(打开工具类)加密以后的密码
 
-亮点:集成了众多插件,md编辑器,代码块高亮和文本页面美化
+```java
+ System.out.println(code("123456"));//e10adc3949ba59abbe56e057f20f883e
+```
+
+4.localhost:8080访问主页,localhost:8080/admin进入管理登录页
+
+5.注意
+
+​	a.部分页面的js库为cdn引入,需要在联网的情况下访问
+
+​	b.`<!--/*/</th:block>/*/-->`这种注释在thymeleaf模板下生效,不能将其删除
+
+
+
+### 二.主要功能
+
+1.后台登录和注销的实现,欢迎页
+
+2.博客管理(引入md编辑器插件)
+
+3.标签和分类管理
+
+4.博客首页展示
+
+5.博客详情页(引入了多种插件,进行了文本美化,代码高亮显示)
+
+6.评论功能
+
+7.博客按分类和标签进行展示
+
+8.全局搜索和归档
