@@ -6,4 +6,4 @@
 
 ### 2.library-master
 
-基于spring+mybatis+bootstrap的图书管理系统
+基于springboot+mybatis+bootstrap的图书管理系统
