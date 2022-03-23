@@ -1,0 +1,82 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">图书管理</a></li>
+                        <li><a href="#" th:href="@{/sortManager}">分类管理</a></li>
+                        <li><a href="#" th:href="@{/userManager}">用户管理</a></li>
+                        <li><a href="#" th:href="@{/adminManager}">管理员管理</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <a th:href="@{/login}">
+                        <p class="lead" style="margin-top: 10px;" th:if="${session.loginAdmin.username} !=null"
+                           th:text="${session.loginAdmin.username}">游客</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h4 class="alert-warning text-center">[[${cannotDelete}]]</h4>
+            <a class="btn btn-info" th:href="@{/addBook}">增加</a>
+            <div class="row">
+                <table class="table table-bordered table-striped  text-center">
+                    <br/>
+                    <tr>
+                        <td class="col-md-1"><P>序号</p></td>
+                        <td class="col-md-1"><P>书名</p></td>
+                        <td class="col-md-1"><P>作者</p></td>
+                        <td class="col-md-1"><P>封面地址</p></td>
+                        <td class="col-md-5"><p>简介</p></td>
+                        <td class="col-md-1"><P>库存</p></td>
+                        <td class="col-md-1"><P>分类</p></td>
+                        <td class="col-md-1"><p>借阅人</p></td>
+                        <td class="col-md-1"><p>操作1</p></td>
+                        <td class="col-md-1"><p>操作2</p></td>
+                    </tr>
+                    <tr th:each="book,stat:${bookMange}">
+                        <td class="col-md-1"><P th:text="${stat.count}">1</p></td>
+                        <td class="col-md-1"><P th:text="${book.name}">查拉图斯特拉如是说</p></td>
+                        <td class="col-md-1"><P th:text="${book.author}">[德国] 弗里德里希·尼采</p></td>
+                        <td class="col-md-1"><P th:text="${book.img}">images/76422953_p0.jpg</p></td>
+                        <td class="col-md-5"><p th:text="${book.about}">尼采假借查拉图斯特拉之名说出他自己的哲学思想。</p></td>
+                        <td class="col-md-1"><P th:text="${book.stack}">666</p></td>
+                        <td class="col-md-1"><P th:text="${book.sort.sortName}">分类</p></td>
+                        <td class="col-md-1"><a class="btn btn-success" th:href="@{'/bookShowLend/'+${book.id}}">查看</a>
+                        <td class="col-md-1"><a class="btn btn-warning" th:href="@{'/updateBook/'+${book.id}}">修改</a>
+                        </td>
+                        <td class="col-md-1"><a onclick="javascript:return del();" class="btn btn-danger"
+                                                th:href="@{'/deleteBook/'+${book.id}}">删除</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <a th:href="@{/index2}" class="btn">
+                返回上面<span class="glyphicon glyphicon-arrow-up"></span>
+            </a>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function del() {
+        var msg = "确定要删除吗？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li><a href="index.html" th:href="@{/index}">上新推荐</a></li>
+                        <li class="active"><a>热门借阅</a></li>
+                        <li><a href="sort.html" th:href="@{/sort}">分类查看</a></li>
+                        <li><a href="#" th:href="@{/my}">我的借阅</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <a th:href="@{/login}">
+                        <p style="margin-top: 8px;" class="lead" th:text="${session.loginUser.username}">游客</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <form th:action="@{/search}" method="post">
+                    <div class="col-md-11">
+                        <input type="text" name="keyWord" class="form-control" placeholder="搜索你喜欢的"/>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-warning">开始</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <table class="table text-center">
+                    <br/>
+                    <tr th:each="book,stat:${booksOrderByStack}">
+                        <td class="col-md-1">TOP<P th:text="${stat.count}"></p></td>
+                        <td class="col-md-1"><img src="images/76422953_p0.jpg" th:src="${book.img}"
+                                                  style="width: 50px;height: 60px;"/></td>
+                        <td class="col-md-2"><P th:text="'《'+${book.name}+'》'">查拉图斯特拉如是说</p></td>
+                        <td class="col-md-2"><P th:text="${book.author}">[德国] 弗里德里希·尼采</p></td>
+                        <td class="col-md-4"><p th:text="${book.about}">尼采假借查拉图斯特拉之名说出他自己的哲学思想。</p></td>
+                        <td class="col-md-1">仅剩<P th:text="${book.stack}">666</p></td>
+                        <td style="padding-top:20px ;" class="col-md-1">
+                            <a class="btn btn-info" onclick="javascript:return tip();" th:href="@{'/borrow/'+${book.id}}">借阅</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function tip() {
+        var msg = "确定要借阅吗？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</html>

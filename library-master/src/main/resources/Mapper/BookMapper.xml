@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjl.library.Mapper.BookMapper">
+    <select id="getBook8ByGetTime" resultType="com.wjl.library.bean.Book">
+        SELECT * FROM book
+            where stack>0
+            ORDER BY `get_time` DESC
+            LIMIT 12
+    </select>
+    <select id="getAllBookOrderByStack" resultType="com.wjl.library.bean.Book">
+        select * from book
+            where stack>0
+            order by stack
+            limit 10
+    </select>
+    <select id="getBookLike" resultType="com.wjl.library.bean.Book">
+        select * from book where name like "%"#{likeName}"%"<!--使用模糊查询注意SQL注入 -->
+    </select>
+    <select id="getAllBookSort" resultMap="BookAssociationSort">
+        SELECT b.`id` bid,b.`name` bname,b.`author` bauthor,b.`about` babout,b.`img` bimg,b.`stack` bstack,b.`get_time` bgetTime,
+        s.id sid,s.`sort_name` sname
+        FROM book b JOIN sort s
+             WHERE b.`sort`=s.`id`
+    </select>
+    <resultMap id="BookAssociationSort" type="com.wjl.library.bean.Book">
+        <id property="id" column="bid"/>
+        <result property="name" column="bname"/>
+        <result property="author" column="bauthor"/>
+        <result property="img" column="bimg"/>
+        <result property="about" column="babout"/>
+        <result property="stack" column="bstack"/>
+        <result property="getTime" column="bgetTime"/>
+        <association property="sort" javaType="com.wjl.library.bean.Sort">
+            <result property="id" column="sid"></result>
+            <result property="sortName" column="sname"></result>
+        </association>
+    </resultMap>
+    <insert id="addBook" useGeneratedKeys="true" keyProperty="id" parameterType="com.wjl.library.bean.Book">
+        insert into book(name,author,img,about,stack,get_time)values(#{name},#{author},#{img},#{about},#{stack},#{getTime})
+    </insert>
+
+</mapper>

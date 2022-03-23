@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container" >
+    <form action="#" class="form-horizontal" role="form" method="post" th:action="@{/addSort}">
+
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-4">
+                <h3 class="text-center">添加新的分类</h3>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="sort" class="control-label col-md-1  col-md-offset-2">分类:</label>
+            <div class="col-md-5">
+                <input type="text" id="sort" name="sortName" class="form-control " placeholder="请输入分类名" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-1 col-md-offset-5">
+                <button class="btn btn-primary">提交</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

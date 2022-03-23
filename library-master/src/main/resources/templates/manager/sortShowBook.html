@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li><a href="#" th:href="@{/index2}">图书管理</a></li>
+                        <li class="active"><a href="#">分类管理</a></li>
+                        <li><a href="#">更多功能</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <p class="lead" style="margin-top: 5px;" th:text="${session.loginAdmin.username}">游客</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h4 class="alert-warning text-center">[[${tip}]]</h4>
+            <div class="col-md-11">
+                <div th:each="book:${booksBySort}">
+                    <div class="col-md-3" style="padding-bottom: 20px">
+
+                        <img src="images/1.jpg" th:src="'../'+${book.img}" style="width: 200px;height: 300px;"/>
+                        <h5 th:text="${book.author}">当年每月</h5>
+                        <div style="width: 220px;height: 75px;">
+                            <p class="small" th:text="${book.about}">不一样的明朝历史...</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

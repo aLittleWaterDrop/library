@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjl.library.Mapper.LendMapper">
+    <select id="getLendBooksByUserId" resultType="com.wjl.library.bean.Book">
+        SELECT `book`.`id` ,book.name,`book`.`author`,`book`.`img`
+        FROM `book` JOIN `lend` JOIN `user`
+        WHERE user.`id`=lend.`user_id`
+         AND book.`id`=lend.`book_id`
+         AND `user`.id=#{id}
+    </select>
+    <insert id="addLend"  parameterType="com.wjl.library.bean.Lend">
+        INSERT INTO lend (`user_id` ,`book_id`,`deadline`) VALUES(#{userId},#{bookId},#{deadline})
+    </insert>
+    <select id="getLendUsersByBookId" resultType="com.wjl.library.bean.User" >
+        SELECT `user`.`id` ,`user`.`username`,`user`.`password`,`user`.`state`
+        FROM `book` JOIN `lend` JOIN `user`
+        WHERE user.`id`=lend.`user_id`
+         AND book.`id`=lend.`book_id`
+         AND `book`.`id`=#{id}
+    </select>
+</mapper>

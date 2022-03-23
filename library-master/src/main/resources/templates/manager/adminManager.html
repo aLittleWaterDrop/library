@@ -1,0 +1,75 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li><a href="#" th:href="@{/index2}">图书管理</a></li>
+                        <li><a href="#" th:href="@{/sortManager}">分类管理</a></li>
+                        <li><a href="#" th:href="@{/userManager}">用户管理</a></li>
+                        <li class="active"><a href="#" th:href="@{/adminManager}">管理员管理</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <a th:href="@{/login2}">
+                        <p class="lead" style="margin-top: 10px;" th:if="${session.loginAdmin.username} !=null"
+                           th:text="${session.loginAdmin.username}">游客</p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <h4 class="alert-warning text-center">[[${tip}]]</h4>
+            <a class="btn btn-info" th:href="@{/addAdmin}">增加</a>
+            <div class="row">
+                <table class="table table-bordered table-striped  text-center">
+                    <br/>
+                    <tr>
+                        <td class="col-md-1"><P>序号</p></td>
+                        <td class="col-md-2"><P>管理员名</p></td>
+                        <td class="col-md-2"><P>管理员密码</P></td>
+                        <td class="col-md-1"><P>是否为超管</P></td>
+                        <td class="col-md-1"><P>操作1</P></td>
+                        <td class="col-md-1"><P>操作2</P></td>
+                    </tr>
+                    <tr th:each="admin,stat:${admins}">
+                        <td class="col-md-1"><P th:text="${stat.count}">1</p></td>
+                        <td class="col-md-2"><P th:text="${admin.username}">root</p></td>
+                        <td class="col-md-2"><P th:text="${admin.password}">123456</p></td>
+                        <td class="col-md-1">
+                            <P th:if="${admin.isRoot}==1" th:text="是">否</p>
+                            <P th:unless="${admin.isRoot}==1" th:text="否">否</p>
+                        </td>
+                        <td class="col-md-1"><a class="btn btn-warning" th:href="@{'/updateAdmin/'+${admin.id}}">修改</a></td>
+                        <td class="col-md-1"><a onclick="javascript:return del();" class="btn btn-danger"
+                                                th:href="@{'/deleteAdmin/'+${admin.id}}">删除</a></td>
+                    </tr>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function del() {
+        var msg = "确定要删除吗？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

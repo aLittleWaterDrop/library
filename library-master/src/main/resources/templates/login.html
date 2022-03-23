@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../static/bootstrap/dist/css/bootstrap.min.css"th:href="@{../bootstrap/dist/css/bootstrap.min.css}" />
+		<title></title>
+	</head>
+	<body>
+		<br />
+		<br />
+		<br />
+		<br />
+		<div class="row">
+			<div class="col-md-4 col-lg-offset-4" style="width: 28em;border:1px darkgray solid  ;">
+				<form class="form-signin" action="#" method="post"  th:action="@{/login}">
+				   <h2 class="form-signin-heading text-center">学生账号登陆</h2>
+				   <input type="text" name="username" id="username" class="form-control" placeholder="请输入账户" required autofocus>
+				   <br />
+				   <input type="password" name="password" id="password" class="form-control" placeholder="请输入密码" required>
+				   <br />
+				   <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+					<label style="color: red" th:text="${msg}"></label>
+					<br />
+					<a class="form text-center small pull-right" th:href="@{/login2}">管理员账号登陆</a>
+				 </form>
+			</div>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <!-- form-horizontal表示水平排列的表单 -->
+    <form action="#" class="form-horizontal" role="form" method="post" th:action="@{/updateUser}">
+
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-4">
+                <h3 class="text-center">修改用户信息</h3>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username" class="control-label col-md-2">用户名:</label>
+            <div class="col-md-7">
+                <input type="text" id="username" name="username" class="form-control " th:value="${userById.username}" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="control-label col-md-2">密码:</label>
+            <div class="col-md-7">
+                <input type="text" id="password" name="password" class="form-control " th:value="${userById.password}" required/>
+            </div>
+        </div>
+
+        <input type="hidden" name="id" th:value="${userById.id}">
+        <input type="hidden" name="id" th:value="${userById.state}">
+
+        <div class="form-group">
+            <div class="col-md-1 col-md-offset-5">
+                <button class="btn btn-primary">提交</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li><a href="#" th:href="@{/index2}">图书管理</a></li>
+                        <li><a href="#" th:href="@{/sortManager}">分类管理</a></li>
+                        <li class="active"><a href="#" th:href="@{/userManager}">用户管理</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <p class="lead" style="margin-top: 5px;" th:text="${session.loginAdmin.username}">游客</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h4 class="alert-warning text-center">[[${userInfo}]]</h4>
+            <div class="row">
+                <div class="col-md-9" style="margin-right: 0;padding-right: 0">
+                    <table class="table table-bordered text-center ">
+                        <tr>
+                            <td class="col-md-1"><p>序号</p></td>
+                            <td class="col-md-1"><p>封面</p></td>
+                            <td class="col-md-2"><P>书名</p></td>
+                            <td class="col-md-2"><P>作者</p></td>
+                        </tr>
+                        <tr th:each="book,stat:${lendBooks}">
+                            <td class="col-md-1"><p th:text="${stat.count}">1</p></td>
+                            <td class="col-md-1"><img src="images/76422953_p0.jpg" th:src="'../'+${book.img}"
+                                                      style="width: 35px;height: 50px;"/></td>
+                            <td class="col-md-2"><P th:text="'《'+${book.name}+'》'">查拉图斯特拉如是说</p></td>
+                            <td class="col-md-2"><P th:text="${book.author}">[德国] 弗里德里希·尼采</p></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-3" style="margin-left: 0;padding-left: 0">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <td class="col-md-2"><p>还书期限</p></td>
+                        </tr>
+                        <tr th:each="lend:${lends}">
+                            <td class="col-md-2">
+                                <p style="height: 40px;" th:text="${#dates.format(lend.deadline,'yyyy-MM-dd')}">
+                                    2022/10/01</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <h3 class="alert-warning text-center">[[${userInfo2}]]</h3>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

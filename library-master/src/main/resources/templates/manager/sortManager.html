@@ -1,0 +1,71 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li><a href="#" th:href="@{/index2}">图书管理</a></li>
+                        <li class="active"><a href="#">分类管理</a></li>
+                        <li><a href="#" th:href="@{/userManager}">用户管理</a></li>
+                        <li><a href="#" th:href="@{/adminManager}">管理员管理</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <a th:href="@{/login2}">
+                        <p class="lead" style="margin-top: 10px;" th:if="${session.loginAdmin.username} !=null"
+                           th:text="${session.loginAdmin.username}">游客</p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <h4 class="alert-warning text-center">[[${cannotDelete}]]</h4>
+            <a class="btn btn-info" th:href="@{/addSort}">增加</a>
+            <div class="row">
+                <table class="table table-bordered table-striped  text-center">
+                    <br/>
+                    <tr>
+                        <td class="col-md-1"><P>序号</p></td>
+                        <td class="col-md-2"><P>分类名</p></td>
+                        <td class="col-md-1"><P>所含图书</P></td>
+                        <td class="col-md-1"><P>操作1</P></td>
+                        <td class="col-md-1"><P>操作2</P></td>
+                    </tr>
+                    <tr th:each="sort,stat:${sorts}">
+                        <td class="col-md-1"><P th:text="${stat.count}">1</p></td>
+                        <td class="col-md-2"><P th:text="${sort.sortName}">社会</p></td>
+                        <td class="col-md-1"><a class="btn btn-success" th:href="@{'/showSort/'+${sort.id}}">查看</a></td>
+                        <td class="col-md-1"><a class="btn btn-warning" th:href="@{'/updateSort/'+${sort.id}}">修改</a>
+                        </td>
+                        <td class="col-md-1"><a onclick="javascript:return del();" class="btn btn-danger"
+                                                th:href="@{'/deleteSort/'+${sort.id}}">删除</a></td>
+                    </tr>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function del() {
+        var msg = "确定要删除吗？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

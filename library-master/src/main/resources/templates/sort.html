@@ -1,0 +1,87 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <title></title>
+</head>
+
+<body>
+<div class="panel">
+    <div class="container">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li><a href="index.html" th:href="@{/index}">上新推荐</a></li>
+                        <li><a th:href="@{/hot}">热门借阅</a></li>
+                        <li class="active"><a href="sort.html">分类查看</a></li>
+                        <li><a href="my.html" th:href="@{/my}">我的借阅</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <a th:href="@{/login}">
+                        <p style="margin-top: 8px;" class="lead" th:text="${session.loginUser.username}">游客</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel-body">
+            <div class="col-md-1">
+                <ul class="nav nav-stacked" th:each="sort:${sorts}">
+                    <li style="padding-bottom:20px">
+                        <a href="#" th:href="@{'/sortBook/'+${sort.id}}"
+                           style="color: #999999;">[[${sort.sortName}]]</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-11">
+                <h4 class="alert-warning text-center">[[${tip}]]</h4>
+                <div th:each="book:${page.records}" class="col-md-3" style="padding-bottom: 20px">
+                    <img src="images/1.jpg" th:src="'../'+${book.img}" style="width: 200px;height: 300px;"/>
+                    <h5 th:text="${book.author}">当年每月</h5>
+                    <div style="width: 220px;height: 75px;">
+                        <p class="small" th:text="${book.about}">不一样的明朝历史...</p>
+                    </div>
+                    <a onclick="javascript:return tip();" class="btn btn-info" th:href="@{'/borrow/'+${book.id}}">借阅
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container col-md-offset-5">
+            <div>
+                当前第[[${page.getCurrent()}]]页,共[[${page.getPages()}]]页,有[[${page.getTotal()}]]条记录
+            </div>
+            <div>
+                <ul class="pagination">
+                    <li><a th:href="@{'/sortBook/'+${sortId}(pn=${page.getCurrent()}-1)}">&laquo;</a></li>
+                    <li th:class="${num==page.getCurrent() ? 'active' :''}"
+                        th:each="num:${#numbers.sequence(1,page.getPages())}">
+                        <a th:href="@{'/sortBook/'+${sortId}(pn=${num})}">[[${num}]]</a>
+                    </li>
+                    <li><a th:href="@{'/sortBook/'+${sortId}(pn=${page.getCurrent()}+1)}">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+</div>
+
+<script type="text/javascript">
+    function tip() {
+        var msg = "确定要借阅吗？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

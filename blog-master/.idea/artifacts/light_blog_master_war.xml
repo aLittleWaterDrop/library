@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="light-blog-master:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>light-blog-master</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="light-blog-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="light-blog-master:war exploded" />
+    </root>
+  </artifact>
+</component>

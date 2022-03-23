@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="panel">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-md-10">
+							<ul class="nav nav-pills">
+								<li><a th:href="@{/index}">上新推荐</a></li>
+								<li class="active"><a href="hot.html" th:href="@{/hot}">热门借阅</a></li>
+								<li><a href="sort.html" th:href="@{/sort}">分类查看</a></li>
+								<li><a href="my.html" th:href="@{/my}">我的借阅</a></li>
+							</ul>
+						</div>
+						<div class="col-md-1">
+							<p class="lead" th:text="${session.loginUser.username}">游客</p>
+						</div>
+					</div>
+				</div>	
+				<div class="panel-body">
+					<h4 class="alert-info text-center ">搜索结果</h4>
+					<h5 class="alert-warning text-center">[[${noBook}]]</h5>
+					<div th:each="book:${bookLike}">
+						<div class="col-md-3">
+							<div class=" thumbnail">
+								<img src="images/76422953_p0.jpg" th:src="${book.img}" style="width: 240px;height: 360px;"/>
+								<h4 th:text="${book.author}">某某</h4>
+								<div style="width: 240px;height: 85px;">
+									<p th:text="${book.about}">喜欢唱跳rap篮球,喜欢唱跳rap篮球,喜欢唱跳rap篮球</p>
+								</div>
+								<a class="btn btn-info"  th:href="@{'/borrow/'+${book.id}}">借阅
+									<span class="glyphicon glyphicon-book"></span>
+								</a>
+
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>
