@@ -54,4 +54,10 @@ spring:
 7.博客按分类和标签进行展示
 
 8.全局搜索和归档
+
+### 三.示例图片
+
 ![image](https://user-images.githubusercontent.com/101373229/159655763-78d742ba-f0b8-42e6-af5d-84da8345b355.png)
+
+![image](https://user-images.githubusercontent.com/101373229/159656270-387c606b-621c-4c14-a314-a8ba4cf74b4a.png)
+
